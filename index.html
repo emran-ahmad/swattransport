@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HVTMS — Hired Vehicle & Transport Management System | SWAT Transport</title>
+  <meta name="description" content="HVTMS is a professional desktop application for Saudi transport and logistics businesses. Manage your fleet, drivers, invoices, payroll, and P&L — all in one place." />
+  <meta name="keywords" content="transport management, fleet management, hired vehicle, logistics software, Saudi Arabia, VAT invoicing, driver payroll, HVTMS" />
+  <meta property="og:title" content="HVTMS — Transport Management System" />
+  <meta property="og:description" content="The complete desktop solution for Saudi transport & logistics businesses." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:      #1a2b4a;
+      --navy-mid:  #2d4a7a;
+      --navy-lite: #3a5f9a;
+      --gold:      #c8a84b;
+      --gold-lite: #e2c46e;
+      --grey-bg:   #f4f6fa;
+      --grey-card: #eef1f7;
+      --text:      #1e2d45;
+      --text-soft: #5a6a80;
+      --white:     #ffffff;
+      --border:    #d6dde8;
+      --shadow:    0 4px 24px rgba(26,43,74,0.10);
+      --shadow-lg: 0 8px 40px rgba(26,43,74,0.14);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ──────────────────────────────────── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(26,43,74,0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(200,168,75,0.25);
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 24px; height: 68px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-badge {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px; color: var(--navy);
+      letter-spacing: -0.5px;
+    }
+    .logo-text { color: var(--white); font-weight: 700; font-size: 17px; }
+    .logo-sub  { color: var(--gold); font-size: 10px; font-weight: 500; letter-spacing: 1px; display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.80); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold); color: var(--navy);
+      padding: 9px 22px; border-radius: 7px;
+      font-weight: 700; font-size: 14px; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--gold-lite); transform: translateY(-1px); }
+
+    /* ── HERO ─────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a6e 60%, #253d6b 100%);
+      padding: 100px 24px 90px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.35);
+      color: var(--gold-lite); border-radius: 50px;
+      padding: 6px 18px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+      margin-bottom: 28px; text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 58px); font-weight: 800;
+      color: var(--white); line-height: 1.15; margin-bottom: 22px;
+      max-width: 820px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: clamp(16px, 2vw, 19px); color: rgba(255,255,255,0.75);
+      max-width: 640px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .hero-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 14px 32px; border-radius: 8px;
+      font-weight: 700; font-size: 16px; text-decoration: none;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      box-shadow: 0 4px 20px rgba(200,168,75,0.4);
+    }
+    .btn-primary:hover { background: var(--gold-lite); transform: translateY(-2px); box-shadow: 0 6px 28px rgba(200,168,75,0.5); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,0.35); color: var(--white);
+      padding: 13px 30px; border-radius: 8px;
+      font-weight: 600; font-size: 16px; text-decoration: none;
+      transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── STATS BAR ────────────────────────────── */
+    .stats-bar {
+      background: var(--navy);
+      border-top: 1px solid rgba(200,168,75,0.20);
+    }
+    .stats-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; flex-wrap: wrap;
+      padding: 0 24px;
+    }
+    .stat-item {
+      flex: 1; min-width: 180px;
+      padding: 28px 20px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-size: 32px; font-weight: 800; color: var(--gold); }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 4px; }
+
+    /* ── SECTIONS ─────────────────────────────── */
+    .section { padding: 88px 24px; }
+    .section-alt { background: var(--grey-bg); }
+    .container { max-width: 1140px; margin: 0 auto; }
+    .section-tag {
+      font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3.5vw, 40px); font-weight: 800;
+      color: var(--navy); line-height: 1.2; margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px; color: var(--text-soft); max-width: 560px; line-height: 1.7;
+    }
+    .section-header { margin-bottom: 56px; }
+    .section-header.centered { text-align: center; }
+    .section-header.centered .section-sub { margin: 0 auto; }
+
+    /* ── FEATURES GRID ────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--gold);
+    }
+    .feature-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; margin-bottom: 20px;
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+    .feature-card p  { font-size: 14px; color: var(--text-soft); line-height: 1.7; }
+
+    /* ── HOW IT WORKS ─────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 0; }
+    .step {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 28px; align-items: flex-start;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:last-child { border-bottom: none; }
+    .step-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .step-body h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: var(--navy); }
+    .step-body p  { font-size: 15px; color: var(--text-soft); line-height: 1.7; }
+
+    /* ── MODULE LIST ──────────────────────────── */
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .module-card {
+      background: var(--navy);
+      border-radius: 12px; padding: 28px;
+      color: var(--white);
+      border: 1px solid rgba(200,168,75,0.15);
+      transition: border-color .2s, transform .2s;
+    }
+    .module-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+    .module-icon { font-size: 28px; margin-bottom: 14px; }
+    .module-card h3 { font-size: 16px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+    .module-card ul { list-style: none; }
+    .module-card ul li {
+      font-size: 13px; color: rgba(255,255,255,0.70);
+      padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .module-card ul li:last-child { border-bottom: none; }
+    .module-card ul li::before { content: '›'; color: var(--gold); font-weight: 700; }
+
+    /* ── WHY SECTION ──────────────────────────── */
+    .why-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 48px; align-items: center;
+    }
+    .why-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
+    .why-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px; background: var(--white);
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    .why-check {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--gold); color: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; flex-shrink: 0;
+    }
+    .why-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--navy); }
+    .why-item p  { font-size: 13px; color: var(--text-soft); line-height: 1.6; }
+    .why-visual {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a6e 100%);
+      border-radius: 16px; padding: 40px 32px;
+      border: 1px solid rgba(200,168,75,0.20);
+    }
+    .why-visual h3 { color: var(--gold); font-size: 20px; font-weight: 700; margin-bottom: 24px; text-align: center; }
+    .pl-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .pl-row:last-child { border-bottom: none; }
+    .pl-label { font-size: 13px; color: rgba(255,255,255,0.65); }
+    .pl-value { font-size: 15px; font-weight: 700; color: var(--white); }
+    .pl-value.green  { color: #4ade80; }
+    .pl-value.gold   { color: var(--gold); }
+    .pl-value.red    { color: #f87171; }
+
+    /* ── CTA ──────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, var(--navy) 0%, #1e3a6e 100%);
+      padding: 88px 24px; text-align: center;
+    }
+    .cta-section h2 { font-size: clamp(26px, 4vw, 44px); font-weight: 800; color: var(--white); margin-bottom: 16px; }
+    .cta-section p  { font-size: 17px; color: rgba(255,255,255,0.70); max-width: 540px; margin: 0 auto 36px; }
+
+    /* ── FOOTER ───────────────────────────────── */
+    footer {
+      background: #0f1d33;
+      padding: 48px 24px 32px;
+    }
+    .footer-inner {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 24px;
+    }
+    .footer-brand .logo-text { font-size: 20px; }
+    .footer-brand p { color: rgba(255,255,255,0.45); font-size: 13px; margin-top: 8px; max-width: 300px; }
+    .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.50); text-decoration: none; font-size: 13px; transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-bottom {
+      max-width: 1140px; margin: 32px auto 0;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { color: rgba(255,255,255,0.30); font-size: 12px; }
+
+    /* ── RESPONSIVE ───────────────────────────── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .why-grid { grid-template-columns: 1fr; }
+      .stat-item { min-width: 140px; }
+      .step { grid-template-columns: 60px 1fr; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">
+        <div class="logo-badge">HV</div>
+        <div>
+          <span class="logo-text">HVTMS</span>
+          <span class="logo-sub">BY SWAT TRANSPORT</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#modules">Modules</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Request a Demo</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">
+      <span>&#10003;</span> Built for Saudi Transport &amp; Logistics
+    </div>
+    <h1>Run Your Entire Transport<br/>Business from <span>One Desk</span></h1>
+    <p>
+      HVTMS is a powerful desktop application that manages your fleet, drivers,
+      payroll, VAT-compliant invoicing, and real-time P&amp;L — giving you full
+      control of your operations in one place.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Request a Demo</a>
+      <a href="#features" class="btn-outline">Explore Features</a>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <div class="stat-num">6+</div>
+        <div class="stat-label">Core Management Modules</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">VAT / Fatoorah Compliant</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">2</div>
+        <div class="stat-label">P&amp;L Views — Accrual &amp; Cash</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">Offline</div>
+        <div class="stat-label">Works Without Internet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-tag">Core Features</div>
+        <h2 class="section-title">Everything You Need to Run<br/>a Modern Transport Business</h2>
+        <p class="section-sub">
+          From daily trip assignments to monthly P&amp;L reports, HVTMS covers every
+          operational and financial aspect of your transport company.
+        </p>
+      </div>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">🚛</div>
+          <h3>Fleet Management</h3>
+          <p>Track owned vehicles and manage hired contractors in one unified dashboard. Monitor vehicle status, assignments, and maintenance history with ease.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <h3>Trip Tracking &amp; Assignment</h3>
+          <p>Assign trips to drivers on owned vehicles or outsource to hired contractors. Log trip details, routes, and completion status in real time.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Driver Payroll</h3>
+          <p>Automate salary calculations including base pay, advances, held salary, overtime, and deductions. Generate payslips for every driver instantly.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🧾</div>
+          <h3>VAT-Compliant Invoicing</h3>
+          <p>Issue Fatoorah-ready invoices with 15% VAT, client details, and itemized services. Fully compliant with ZATCA requirements for Saudi Arabia.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>P&amp;L Reporting</h3>
+          <p>View your business health in both accrual and cash accounting modes. Drill into revenue, expenses, owner draws, and net profit at any time.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🤝</div>
+          <h3>Hired Vehicle Settlements</h3>
+          <p>Reconcile payments with hired contractors, track commissions, and manage outstanding balances — all without spreadsheets or manual calculation.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULES -->
+  <section class="section section-alt" id="modules">
+    <div class="container">
+      <div class="section-header centered">
+        <div class="section-tag">System Modules</div>
+        <h2 class="section-title">A Complete Suite of<br/>Management Tools</h2>
+        <p class="section-sub">
+          Each module is purpose-built for transport operations — no generic software adapters or workarounds required.
+        </p>
+      </div>
+      <div class="modules-grid">
+
+        <div class="module-card">
+          <div class="module-icon">🚗</div>
+          <h3>Fleet Module</h3>
+          <ul>
+            <li>Owned vehicle registry</li>
+            <li>Hired vehicle &amp; contractor records</li>
+            <li>Vehicle status &amp; assignment tracking</li>
+            <li>Maintenance log</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">🗺️</div>
+          <h3>Operations Module</h3>
+          <ul>
+            <li>Trip creation &amp; scheduling</li>
+            <li>Driver-to-vehicle assignment</li>
+            <li>Outsource trip management</li>
+            <li>Trip completion tracking</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">👷</div>
+          <h3>HR &amp; Payroll Module</h3>
+          <ul>
+            <li>Driver profiles &amp; contracts</li>
+            <li>Monthly payroll processing</li>
+            <li>Advances &amp; deductions</li>
+            <li>Overtime calculation</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📄</div>
+          <h3>Invoicing Module</h3>
+          <ul>
+            <li>Client management</li>
+            <li>Fatoorah / VAT invoices</li>
+            <li>Invoice history &amp; status</li>
+            <li>Payment tracking</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">💼</div>
+          <h3>Finance Module</h3>
+          <ul>
+            <li>Expense recording</li>
+            <li>Owner draw management</li>
+            <li>Hired vehicle settlements</li>
+            <li>Commission tracking</li>
+          </ul>
+        </div>
+
+        <div class="module-card">
+          <div class="module-icon">📈</div>
+          <h3>Reporting Module</h3>
+          <ul>
+            <li>Full P&amp;L statement</li>
+            <li>Accrual &amp; cash views</li>
+            <li>Revenue by client/route</li>
+            <li>Driver cost breakdown</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+        <div>
+          <div class="section-tag">How It Works</div>
+          <h2 class="section-title">Up and Running in Minutes</h2>
+          <p class="section-sub">HVTMS is a native desktop application — no internet subscription, no server setup. Install once and manage everything locally.</p>
+          <div class="steps" style="margin-top:40px;">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-body">
+                <h3>Install on Your Desktop</h3>
+                <p>Download the installer for Windows. No cloud account or internet connection required for daily use.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-body">
+                <h3>Add Your Fleet &amp; Drivers</h3>
+                <p>Set up your vehicles, hired contractors, and driver profiles. Import existing data or start fresh.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-body">
+                <h3>Manage Daily Operations</h3>
+                <p>Assign trips, record expenses, issue invoices, and process payroll — all from one interface.</p>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-body">
+                <h3>Review Your P&amp;L Anytime</h3>
+                <p>Open the reporting dashboard to see real-time profitability, cash flow, and operational summaries.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHY VISUAL -->
+        <div class="why-visual">
+          <h3>📊 Live P&amp;L Dashboard</h3>
+          <div class="pl-row">
+            <span class="pl-label">Total Revenue (This Month)</span>
+            <span class="pl-value green">SAR 148,500</span>
+          </div>
+          <div class="pl-row">
+            <span class="pl-label">Driver Payroll</span>
+            <span class="pl-value red">− SAR 32,800</span>
+          </div>
+          <div class="pl-row">
+            <span class="pl-label">Hired Vehicle Settlements</span>
+            <span class="pl-value red">− SAR 41,200</span>
+          </div>
+          <div class="pl-row">
+            <span class="pl-label">Operating Expenses</span>
+            <span class="pl-value red">− SAR 18,600</span>
+          </div>
+          <div class="pl-row">
+            <span class="pl-label">VAT Collected</span>
+            <span class="pl-value gold">SAR 22,275</span>
+          </div>
+          <div class="pl-row" style="margin-top:8px;padding-top:16px;border-top:1px solid rgba(200,168,75,0.30);border-bottom:none;">
+            <span class="pl-label" style="color:var(--white);font-weight:700;font-size:15px;">Net Profit</span>
+            <span class="pl-value green" style="font-size:20px;">SAR 55,900</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY HVTMS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="why-grid">
+        <div>
+          <div class="section-tag">Why HVTMS</div>
+          <h2 class="section-title">Built Specifically for<br/>Saudi Transport Companies</h2>
+          <p class="section-sub" style="margin-bottom:32px;">
+            Generic accounting or fleet tools miss the nuances of Saudi logistics operations. HVTMS was designed from the ground up for how your business actually works.
+          </p>
+          <ul class="why-list">
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <h4>Fatoorah / ZATCA Compliant</h4>
+                <p>Every invoice is formatted to Saudi tax authority standards with VAT line items and buyer/seller details.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <h4>Works Completely Offline</h4>
+                <p>Built on SQLite — your data stays on your machine. No monthly fees, no internet dependency.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <h4>Handles Hired &amp; Owned Fleets Together</h4>
+                <p>Seamlessly manage both your own vehicles and outsourced trips from a single operations view.</p>
+              </div>
+            </li>
+            <li class="why-item">
+              <div class="why-check">✓</div>
+              <div>
+                <h4>Dual Accounting Views</h4>
+                <p>Switch between accrual and cash P&amp;L with one click — perfect for owner-operators who need both views.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div style="background:var(--navy);border-radius:16px;padding:40px 32px;border:1px solid rgba(200,168,75,0.15);">
+          <h3 style="color:var(--gold);font-size:18px;font-weight:700;margin-bottom:24px;">Tech Stack</h3>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,0.05);border-radius:8px;">
+              <span style="font-size:24px;">⚡</span>
+              <div>
+                <div style="color:var(--white);font-weight:600;font-size:14px;">Electron + React</div>
+                <div style="color:rgba(255,255,255,0.50);font-size:12px;">Native desktop performance with modern UI</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,0.05);border-radius:8px;">
+              <span style="font-size:24px;">🗄️</span>
+              <div>
+                <div style="color:var(--white);font-weight:600;font-size:14px;">SQLite Database</div>
+                <div style="color:rgba(255,255,255,0.50);font-size:12px;">Fast, reliable, fully offline — no server needed</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,0.05);border-radius:8px;">
+              <span style="font-size:24px;">🖥️</span>
+              <div>
+                <div style="color:var(--white);font-weight:600;font-size:14px;">Windows Desktop</div>
+                <div style="color:rgba(255,255,255,0.50);font-size:12px;">Runs on any modern Windows PC</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:14px;padding:14px;background:rgba(255,255,255,0.05);border-radius:8px;">
+              <span style="font-size:24px;">🔒</span>
+              <div>
+                <div style="color:var(--white);font-weight:600;font-size:14px;">Local Data Only</div>
+                <div style="color:rgba(255,255,255,0.50);font-size:12px;">Your business data never leaves your machine</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <div class="section-tag" style="color:var(--gold-lite);">Get Started</div>
+      <h2>Ready to Take Control of<br/>Your Transport Business?</h2>
+      <p>Contact us to request a demo or ask about licensing HVTMS for your company.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:info@swattransport.llc" class="btn-primary">
+          📧 &nbsp;info@swattransport.llc
+        </a>
+      </div>
+      <p style="margin-top:24px;font-size:13px;color:rgba(255,255,255,0.40);">
+        We typically respond within 1 business day.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-badge">HV</div>
+          <div>
+            <span class="logo-text">HVTMS</span>
+            <span class="logo-sub">BY SWAT TRANSPORT</span>
+          </div>
+        </a>
+        <p style="margin-top:12px;">Hired Vehicle &amp; Transport Management System — purpose-built for Saudi logistics businesses.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#modules">Modules</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+        <a href="mailto:info@swattransport.llc">Email Us</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 SWAT Transport LLC · swattransport.llc</p>
+      <p>Built on Electron · React · SQLite</p>
+    </div>
+  </footer>
+
+</body>
+</html>
